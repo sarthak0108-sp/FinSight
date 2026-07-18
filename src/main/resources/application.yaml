@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: financial-rag-analyzer
+  datasource:
+    url: jdbc:postgresql://localhost:5433/financialdb
+    username: sarthak
+    password: enterprise_password
+    driver-class-name: org.postgresql.Driver
+
+  # Swapped from OpenAI to Google GenAI for Gemini's Free Tier
+  ai:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY}
+        chat:
+          options:
+            model: gemini-flash-latest
+        embedding:
+          api-key: ${GEMINI_API_KEY}
+          text:
+            options:
+              model: gemini-embedding-001
+              dimensions: 1536
+
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 1536
+        initialize-schema: true

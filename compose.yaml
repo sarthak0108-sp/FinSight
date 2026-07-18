@@ -1,0 +1,15 @@
+services:
+  pgvector:
+    image: pgvector/pgvector:pg16
+    container_name: financial-vector-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: financialdb
+      POSTGRES_USER: sarthak
+      POSTGRES_PASSWORD: enterprise_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
